@@ -1,0 +1,11 @@
+version: '2'
+services:
+  priority_frontend:
+    image: priority_frontend:1.0
+    networks:
+      - priority
+    ports: 
+      - "7007:3000"
+networks:
+  priority:
+    driver: bridge

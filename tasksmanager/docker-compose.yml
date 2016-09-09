@@ -1,0 +1,21 @@
+version: '2'
+services:
+  priority_db:
+    image: mongo
+    networks:
+      - priority
+  priority_taskmanager:
+    image: priority_taskmanager:1.0 
+    networks:
+      - priority
+    ports:
+      - "3000"
+    depends_on:
+      - priority_db
+    environment:
+      -  HOST=priority_db
+      -  MONGOPORT=27017
+      - "affinity:container==*priority_db*"
+networks:
+  priority:
+    driver: bridge
